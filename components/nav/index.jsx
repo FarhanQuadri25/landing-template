@@ -1,12 +1,12 @@
 "use client";
-import Curve from '@/components/nav/Curve';
+import Curve from "@/components/nav/Curve";
 import styles from "./styles.module.scss";
 import { LINKS } from "@/data/data";
 import Link from "@/components/nav/Link";
 import { motion } from "motion/react";
 import { menuSlide } from "../header/anim";
 
-export default function index({ setIsActive }) {
+export default function index({ setIsActive, menuRef }) {
   return (
     <motion.div
       className={styles.menu}
@@ -14,6 +14,7 @@ export default function index({ setIsActive }) {
       animate="enter"
       exit="exit"
       initial="initial"
+      ref={menuRef}
     >
       <div className={styles.body}>
         <div className={styles.nav}>
@@ -31,7 +32,7 @@ export default function index({ setIsActive }) {
           })}
         </div>
       </div>
-      <Curve/>
+      <Curve />
     </motion.div>
   );
 }

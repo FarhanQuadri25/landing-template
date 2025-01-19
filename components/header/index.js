@@ -4,9 +4,10 @@ import styles from "./style.module.scss";
 import { AnimatePresence } from "motion/react";
 import Nav from "@/components/nav";
 
-export default function index() {
+export default function Index() {
   const [isActive, setIsActive] = useState(false);
   const menuRef = useRef(null);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -32,12 +33,9 @@ export default function index() {
           className={`${styles.burger} ${isActive ? styles.burgerActive : ""}`}
         ></div>
       </div>
+
       <AnimatePresence mode="wait">
-        {isActive && (
-          <div ref={menuRef}>
-            <Nav setIsActive={setIsActive} />
-          </div>
-        )}
+        {isActive && <Nav menuRef={menuRef} setIsActive={setIsActive} />}
       </AnimatePresence>
     </>
   );
