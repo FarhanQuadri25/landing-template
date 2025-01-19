@@ -10,7 +10,11 @@ export default function Index() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !event.target.closest(`.${styles.button}`)
+      ) {
         setIsActive((prev) => !prev);
       }
     };
@@ -35,7 +39,7 @@ export default function Index() {
       </div>
 
       <AnimatePresence mode="wait">
-        {isActive && <Nav  setIsActive={setIsActive} />}
+        {isActive && <Nav menuRef={menuRef} setIsActive={setIsActive} />}
       </AnimatePresence>
     </>
   );
