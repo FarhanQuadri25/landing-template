@@ -1,11 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
 import { AnimatePresence } from "motion/react";
 import Nav from "@/components/nav";
 
 export default function index() {
   const [isActive, setIsActive] = useState(false);
+  const menuRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -18,7 +33,11 @@ export default function index() {
         ></div>
       </div>
       <AnimatePresence mode="wait">
-        {isActive && <Nav setIsActive={setIsActive} />}
+        {isActive && (
+          <div ref={menuRef}>
+            <Nav setIsActive={setIsActive} />
+          </div>
+        )}
       </AnimatePresence>
     </>
   );
