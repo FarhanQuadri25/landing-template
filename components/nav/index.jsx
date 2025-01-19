@@ -14,7 +14,6 @@ export default function index({ setIsActive, menuRef }) {
       animate="enter"
       exit="exit"
       initial="initial"
-      ref={menuRef}
     >
       <div className={styles.body}>
         <div className={styles.nav}>
